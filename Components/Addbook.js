@@ -1,23 +1,46 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native';
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
 
-export default function Addbook(props) {
-	const [open, setOpen] = useState(false);
-	const [book, setBook] = useState({
-		firstname: "",
-		lastname: "",
-		streetaddress: "",
-		postcode: "",
-		city: "",
-		email: "",
-		phone: ""
+function Addbook({ route }) {
+  const [text, setText] = useState('');
+  const [data, setData] = useState([]);
 
-    })};
+  const addToList = () => {
+		saveBook();
+    setData([...data, { key: text }]);
+    setText('');
+  }
+
+  const clearList = () => {
+    setData([]);
+  }
+
+  return (
+    <View style={styles.container}>
+      <TextInput style={styles.input} onChangeText={text => setText(text)} value={text} />
+      <View style={styles.napit}>
+        <Button onPress={addToList} title="+Lisää kirja" />
+        <Button onPress={clearList} title="Kumoa" />
+      </View>
+      <FlatList style={styles.list}
+        data={data}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => <Text>{item.key}</Text>
+        }
+      />
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffe4e1',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+
+export default Addbook;
