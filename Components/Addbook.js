@@ -20,7 +20,7 @@ function Addbook({ route }) {
     <View style={styles.container}>
       <TextInput style={styles.input} onChangeText={text => setText(text)} value={text} />
       <View style={styles.napit}>
-        <Button onPress={addToList} title="+Lisää kirja" />
+        <Button onPress={addToList} title="Lisää kirja" />
         <Button onPress={clearList} title="Kumoa" />
       </View>
       <FlatList style={styles.list}
@@ -37,7 +37,7 @@ function Addbook({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffe4e1',
+    backgroundColor: '#faf0e6',
     alignItems: 'center',
     justifyContent: 'center',
   },

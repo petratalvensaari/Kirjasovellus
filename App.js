@@ -24,10 +24,22 @@ export default function App() {
         <Tab.Screen
           name="Kotisivu"
           component={Homescreen}
+          options={{
+            tabBarLabel: 'Koti',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home" color={color} size={size} />
+            ),
+          }}
         />
         <Tab.Screen
           name="Lukemani kirjat"
           component={BooklistNavigator}
+          options={{
+            tabBarLabel: 'Lukemani kirjat',
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="book" color={color} size={size} />
+            ),
+          }}
         />
       </Tab.Navigator>
     </NavigationContainer>
@@ -37,7 +49,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 5,
-    backgroundColor: '#ffe4e1',
+    backgroundColor: '#faf0e6',
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
