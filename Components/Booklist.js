@@ -20,28 +20,8 @@ const Booklist = ({ navigation }) => {
 return (
   
   <View style={styles.container}>
-    
-    <TextInput
-    style={styles.textInput}
-    placeholder="Enter book name"
-    onChangeText={(text)=>{setName(text)}}
-    value={name}
-    />
-    <TextInput
-    style={styles.textInput}
-    placeholder="Enter author"
-    onChangeText={(text)=>{setAuthor(text)}}
-    value={author}
-    />
-    <TextInput
-    style={styles.textInput}
-    placeholder="Enter year"
-    onChangeText={(text)=>{setYear(text)}}
-    value={year}
-    />
-
-
-    <Button title="Lisää uusi kirja" size="s" backgroundColor="#ffb6c1"
+    <Text>Tässä pitäisi näkyä lisätyt kirjat</Text>
+    <Button title="Tästä uuden kirjan lisäykseen" size="s" backgroundColor="#ffb6c1"
       onPress={() => navigation.navigate('Uuden kirjan lisäys')}
     />
 

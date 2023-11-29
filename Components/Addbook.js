@@ -1,37 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
 
-function Addbook({ route }) {
-  const [text, setText] = useState('');
-  const [data, setData] = useState([]);
+const Addbook = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [year, setYear] = useState("");
+  const [display, setDisplay] = useState(false);
 
-  const addToList = () => {
-		saveBook();
-    setData([...data, { key: text }]);
-    setText('');
+  const resetForm =()=>{
+    setDisplay(false);
+    setName("");
+    setAuthor("");
+    setYear("")
   }
 
-  const clearList = () => {
-    setData([]);
-  }
 
-  return (
-    <View style={styles.container}>
-      <TextInput style={styles.input} onChangeText={text => setText(text)} value={text} />
-      <View style={styles.napit}>
-        <Button onPress={addToList} title="Lisää kirja" />
-        <Button onPress={clearList} title="Kumoa" />
-      </View>
-      <FlatList style={styles.list}
-        data={data}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Text>{item.key}</Text>
-        }
-      />
-      <StatusBar style="auto" />
-    </View>
-  );
+return (
+  
+  <View style={styles.container}>
+    
+    <TextInput
+    style={styles.textInput}
+    placeholder="Enter book name"
+    onChangeText={(text)=>{setName(text)}}
+    value={name}
+    />
+    <TextInput
+    style={styles.textInput}
+    placeholder="Enter author"
+    onChangeText={(text)=>{setAuthor(text)}}
+    value={author}
+    />
+    <TextInput
+    style={styles.textInput}
+    placeholder="Enter year"
+    onChangeText={(text)=>{setYear(text)}}
+    value={year}
+    />
+
+
+    <Button title="Lisää uusi kirja" size="s" backgroundColor="#ffb6c1"
+      onPress={() => navigation.navigate('Uuden kirjan lisäys')}
+    />
+
+  </View>
+  
+);
 }
 
 const styles = StyleSheet.create({
