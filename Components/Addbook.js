@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import Booklist from "./Booklist";
-import { StyleSheet, Text, View, Button, TextInput, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput,  SafeAreaView } from 'react-native';
 
-export default function Addbook() {
+export default function Addbook({navigation}) {
   const [bookName, setBookName] = useState('');
   const [writer, setWriter] = useState('');
   const [year, setYear] = useState('');
@@ -11,14 +11,17 @@ export default function Addbook() {
   const [key, setKey] = useState(0);
 
   const buttonAdd = () => {
-    setData([...data, { id: key, title: bookName, writer: writer, year: year }]);
+    const newBook = { id: key, title: bookName, writer: writer, year: year };
+    const updatedData = [...data, newBook];
+    
+    setData(updatedData);
     setKey(key + 1);
     setBookName('');
     setWriter('');
     setYear('');
-    console.log(data);
-  }
-
+  
+    navigation.navigate('Kirjalista', { bookData: updatedData });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,18 +46,13 @@ export default function Addbook() {
           keyboardType="numeric" 
         />
         <View style={styles.buttons}>
-        <Button title="Add book" size="s" backgroundColor="#ffb6c1"
-        onPress={buttonAdd} 
-        />
+        <Button
+            title="Add Book"
+            onPress={buttonAdd}
+          />
           <StatusBar style="auto" />
         </View>
         <View style={styles.booklist}>
-          <FlatList
-            data={data}
-            renderItem={({ item }) =>
-              <Text>{item.title} - {item.writer} ({item.year})</Text>
-            }
-          />
         </View>
       </View>
     </SafeAreaView>
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  grocerylist: {
+  booklist: {
     marginTop: 40,
     justifyContent: 'center',
     alignItems: 'center',
