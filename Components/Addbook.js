@@ -43,9 +43,9 @@ export default function Addbook() {
           keyboardType="numeric" 
         />
         <View style={styles.buttons}>
-        <Button title="Addbook" size="s" backgroundColor="#ffb6c1"
-      onPress={() => navigation.navigate('Kirjalista')}
-    />
+        <Button title="Add book" size="s" backgroundColor="#ffb6c1"
+        onPress={buttonAdd} 
+        />
           <StatusBar style="auto" />
         </View>
         <View style={styles.booklist}>
