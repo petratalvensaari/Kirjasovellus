@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
+import Booklist from "./Booklist";
 import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
 
 const Addbook = ({ navigation }) => {
@@ -41,7 +42,7 @@ return (
 
 
     <Button title="Lisää uusi kirja" size="s" backgroundColor="#ffb6c1"
-      onPress={() => navigation.navigate('Uuden kirjan lisäys')}
+      onPress={() => navigation.navigate('Kirjalista')}
     />
 
   </View>
