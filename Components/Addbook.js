@@ -1,53 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import Booklist from "./Booklist";
-import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, FlatList, SafeAreaView } from 'react-native';
 
-const Addbook = ({ navigation }) => {
-  const [name, setName] = useState("");
-  const [author, setAuthor] = useState("");
-  const [year, setYear] = useState("");
-  const [display, setDisplay] = useState(false);
+export default function Addbook() {
+  const [book, setBook] = useState('');
+  const [data, setData] = useState([]);
+  const [key, setKey] = useState(0);
 
-  const resetForm =()=>{
-    setDisplay(false);
-    setName("");
-    setAuthor("");
-    setYear("")
+  const buttonAdd = ({ navigation }) => {
+    setData([...data, { id: key, title: book, }]);
+    setKey(key + 1);
+
+    console.log(data);
   }
 
 
-return (
-  
-  <View style={styles.container}>
-    
-    <TextInput
-    style={styles.textInput}
-    placeholder="Enter book name"
-    onChangeText={(text)=>{setName(text)}}
-    value={name}
-    />
-    <TextInput
-    style={styles.textInput}
-    placeholder="Enter author"
-    onChangeText={(text)=>{setAuthor(text)}}
-    value={author}
-    />
-    <TextInput
-    style={styles.textInput}
-    placeholder="Enter year"
-    onChangeText={(text)=>{setYear(text)}}
-    value={year}
-    />
-
-
-    <Button title="Lisää uusi kirja" size="s" backgroundColor="#ffb6c1"
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>
+        <TextInput
+            style={styles.input}
+            onChangeText={book => setBook(book)} value={book}
+          />
+        <View style={styles.buttons}>
+        <Button title="Lisää uusi kirja" size="s" backgroundColor="#ffb6c1"
       onPress={() => navigation.navigate('Kirjalista')}
     />
-
-  </View>
-  
-);
+          <StatusBar style="auto" />
+        </View>
+        <View style={styles.booklist}>
+        <FlatList
+          data={data}
+          renderItem={({ item }) =>
+            <Text>{item.title}</Text>
+          }
+        />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -57,6 +49,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  innerContainer: {
+    width: 120,
+  },
+  centerResult: {
+    alignItems: 'center',
+  },
+  input: {
+    marginBottom: 20,
+    borderColor: 'gray',
+    borderWidth: 1,
+  },
+  buttons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  grocerylist: {
+    marginTop: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+  },
 });
 
-export default Addbook;

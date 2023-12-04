@@ -2,20 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, Button, StyleSheet, TouchableOpacity, Text, TextInput, } from "react-native";
 import Addbook from "./Addbook";
 
-// function Booklist({ navigation }) { //
 
 const Booklist = ({ navigation }) => {
-  const [name, setName] = useState("");
-  const [author, setAuthor] = useState("");
-  const [year, setYear] = useState("");
-  const [display, setDisplay] = useState(false);
-
-  const resetForm =()=>{
-    setDisplay(false);
-    setName("");
-    setAuthor("");
-    setYear("")
-  }
+ 
 
 
 return (
