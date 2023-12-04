@@ -4,14 +4,18 @@ import Booklist from "./Booklist";
 import { StyleSheet, Text, View, Button, TextInput, FlatList, SafeAreaView } from 'react-native';
 
 export default function Addbook() {
-  const [book, setBook] = useState('');
+  const [bookName, setBookName] = useState('');
+  const [writer, setWriter] = useState('');
+  const [year, setYear] = useState('');
   const [data, setData] = useState([]);
   const [key, setKey] = useState(0);
 
-  const buttonAdd = ({ navigation }) => {
-    setData([...data, { id: key, title: book, }]);
+  const buttonAdd = () => {
+    setData([...data, { id: key, title: bookName, writer: writer, year: year }]);
     setKey(key + 1);
-
+    setBookName('');
+    setWriter('');
+    setYear('');
     console.log(data);
   }
 
@@ -19,23 +23,38 @@ export default function Addbook() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
+      <TextInput
+          style={styles.input}
+          placeholder="Name"
+          onChangeText={text => setBookName(text)}
+          value={bookName}
+        />
+      <TextInput
+          style={styles.input}
+          placeholder="Writer"
+          onChangeText={text => setWriter(text)}
+          value={writer}
+        />
         <TextInput
-            style={styles.input}
-            onChangeText={book => setBook(book)} value={book}
-          />
+          style={styles.input}
+          placeholder="Year"
+          onChangeText={text => setYear(text)}
+          value={year}
+          keyboardType="numeric" 
+        />
         <View style={styles.buttons}>
-        <Button title="Lisää uusi kirja" size="s" backgroundColor="#ffb6c1"
+        <Button title="Addbook" size="s" backgroundColor="#ffb6c1"
       onPress={() => navigation.navigate('Kirjalista')}
     />
           <StatusBar style="auto" />
         </View>
         <View style={styles.booklist}>
-        <FlatList
-          data={data}
-          renderItem={({ item }) =>
-            <Text>{item.title}</Text>
-          }
-        />
+          <FlatList
+            data={data}
+            renderItem={({ item }) =>
+              <Text>{item.title} - {item.writer} ({item.year})</Text>
+            }
+          />
         </View>
       </View>
     </SafeAreaView>

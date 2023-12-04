@@ -5,8 +5,6 @@ import Addbook from "./Addbook";
 
 const Booklist = ({ navigation }) => {
  
-
-
 return (
   
   <View style={styles.container}>
