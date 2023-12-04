@@ -7,17 +7,18 @@ export default function Booklist({ route, navigation }) {
   const { bookData } = route.params || { bookData: [] };
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={bookData}
         renderItem={({ item }) => (
           <Text>{item.title} - {item.writer} ({item.year})</Text>
         )}
-    
       />
+      <View style={styles.buttons}>
 <Button title="Tästä uuden kirjan lisäykseen" size="s" backgroundColor="#faf0e6"
       onPress={() => navigation.navigate('Uuden kirjan lisäys')}
     />
+    </View>
     </View>
   );
 }
@@ -28,5 +29,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#faf0e6',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
 });
