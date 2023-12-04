@@ -47,7 +47,7 @@ export default function Addbook({navigation}) {
         />
         <View style={styles.buttons}>
         <Button
-            title="Add Book"
+            title="Lisää kirja"
             onPress={buttonAdd}
           />
           <StatusBar style="auto" />

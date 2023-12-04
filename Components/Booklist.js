@@ -14,11 +14,9 @@ export default function Booklist({ route, navigation }) {
           <Text>{item.title} - {item.writer} ({item.year})</Text>
         )}
       />
-      <View style={styles.buttons}>
-<Button title="Tästä uuden kirjan lisäykseen" size="s" backgroundColor="#faf0e6"
+      <Button style={styles.button} title="Tästä uuden kirjan lisäykseen" size="s" backgroundColor="#faf0e6"
       onPress={() => navigation.navigate('Uuden kirjan lisäys')}
     />
-    </View>
     </View>
   );
 }
@@ -31,7 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-    flexDirection: 'row',
+    flexDirection: 'center',
     alignItems: 'center',
     justifyContent: 'space-around',
   },
