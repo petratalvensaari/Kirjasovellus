@@ -2,25 +2,21 @@ import React, { useState, useEffect } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput,  SafeAreaView } from 'react-native';
 
-export default function Addbook({navigation}) {
-  const [bookName, setBookName] = useState('');
-  const [writer, setWriter] = useState('');
-  const [year, setYear] = useState('');
-  const [data, setData] = useState([]);
-  const [key, setKey] = useState(0);
-
-  const buttonAdd = () => {
-    const newBook = { id: key, title: bookName, writer: writer, year: year };
-    const updatedData = [...data, newBook];
-    
-    setData(updatedData);
-    setKey(key + 1);
-    setBookName('');
-    setWriter('');
-    setYear('');
+export default function Addbook({ navigation, route }) {
+  const { buttonAdd } = route.params;
+    const [bookName, setBookName] = useState('');
+    const [writer, setWriter] = useState('');
+    const [year, setYear] = useState('');
   
-    navigation.navigate('Kirjalista', { bookData: updatedData });
-  };
+    const handleButtonAdd = () => {
+      buttonAdd(bookName, writer, year);
+      setBookName('');
+      setWriter('');
+      setYear('');
+  
+        navigation.navigate('Kirjalista');
+    
+    };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,7 +43,7 @@ export default function Addbook({navigation}) {
         <View style={styles.buttons}>
         <Button
             title="Lisää kirja"
-            onPress={buttonAdd}
+            onPress={handleButtonAdd}
           />
           <StatusBar style="auto" />
         </View>
